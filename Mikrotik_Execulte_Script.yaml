@@ -1,0 +1,11 @@
+---
+- name: Executar script personalizado na routerboard MikroTik
+  hosts: test_mikrotik
+  gather_facts: no
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    ansible_connection: network_cli
+    ansible_network_os: ios
+  tasks:
+    - name: Executa o script personalizado
+      raw: "{{ script }}"
