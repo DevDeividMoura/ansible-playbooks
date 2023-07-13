@@ -1,6 +1,6 @@
 ---
 - name: Executar script personalizado na routerboard MikroTik
-  hosts: test_mikrotik
+  hosts: Backbone - Test
   gather_facts: no
   vars:
     ansible_python_interpreter: /usr/bin/python3
