@@ -4,7 +4,7 @@
   gather_facts: no
   tasks:
     - name: Get RouterBOARD Name
-      raw: "/system identity get name"
+      raw: "/system identity print; quit"
       register: rb_name
 
     - name: Log Messages
