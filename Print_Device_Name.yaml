@@ -4,5 +4,5 @@
   gather_facts: no
   tasks:
     - name: Log Messages
-      raw: "{ :log info \"AWX Entrando\"; :log info (\"Nome da RB: \" . [/system identity get name]); :log info \"AWX Saindo\"; }"
+      raw: "{ :log info \"AWX Entrando\"; :log info (\"Nome da RB: \" . [/system identity get name]); :log info \"AWX Saindo\"; quit; }"
 
