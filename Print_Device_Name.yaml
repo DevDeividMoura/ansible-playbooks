@@ -1,6 +1,7 @@
 ---
 - name: Print RouterBOARD Name Sample
   hosts: all
+  gather_facts: no
   tasks:
     - name: Get RouterBOARD Name
       raw: /system identity print
