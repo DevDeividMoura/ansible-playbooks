@@ -1,4 +1,5 @@
 ---
+- name: Test Ping Host
 - hosts: "{{ target }}"
   tasks:
     - name: Test ping
