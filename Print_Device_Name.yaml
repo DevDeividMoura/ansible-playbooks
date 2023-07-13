@@ -3,10 +3,6 @@
   hosts: all
   gather_facts: no
   tasks:
-    - name: Get RouterBOARD Name
-      raw: /system identity print
-      register: result
+    - name: Log Messages
+      raw: "{ :log info \"AWX Entrando\"; :log info (\"Nome da RB: \" . [/system identity get name]); :log info \"AWX Saindo\"; }"
 
-    - name: Print RouterBOARD Name
-      debug:
-        msg: "The RouterBOARD name is {{ result.stdout }}"
