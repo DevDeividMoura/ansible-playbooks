@@ -1,0 +1,11 @@
+---
+- name: Print RouterBOARD Name Sample
+  hosts: all
+  tasks:
+    - name: Get RouterBOARD Name
+      raw: /system identity print
+      register: result
+
+    - name: Print RouterBOARD Name
+      debug:
+        msg: "The RouterBOARD name is {{ result.stdout }}"
