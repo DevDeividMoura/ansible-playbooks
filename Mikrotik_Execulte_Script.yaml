@@ -3,14 +3,14 @@
   hosts: "{{ hosts }}"
   gather_facts: no
   tasks:
-    - name: Get RouterBOARD Name
-      raw: "/system identity get name; quit"
-      register: rb_name
-
     - name: Run Script
       raw: "{{ script }}; quit"
       register: result
 
+    - name: Get RouterBOARD Name
+      raw: "/system identity get name; quit"
+      register: rb_name
+      
     - name: Print Result
       debug:
         msg: "Script executado no dispositivo: {{ rb_name.stdout | regex_replace('[\\r\\n\\u001b\\[\\d+mB]', '') }}"
