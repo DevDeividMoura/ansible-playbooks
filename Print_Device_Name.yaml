@@ -4,7 +4,7 @@
   gather_facts: no
   tasks:
     - name: Get RouterBOARD Name
-      raw: "/system identity print; quit;"
+      raw: ":put ("**" . [/system identity get name] . "**"); quit;"
       register: rb_name
       changed_when: false
 
@@ -14,7 +14,7 @@
 
     - name: Clean RouterBOARD Name
       set_fact:
-        cleaned_rb_name: "{{ rb_name.stdout | regex_replace('\r|\u001b[9999B|\r\r\ninterrupted\n\u001b7\u001b[m\u001b8', '') }}"
+        cleaned_rb_name: "{{ rb_name.stdout | regex_replace('\*\*(.*?)\*\*', '\\1') }}"
 
     - name: Print Message
       debug:
