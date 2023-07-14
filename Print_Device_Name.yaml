@@ -4,12 +4,18 @@
   gather_facts: no
   tasks:
     - name: Get RouterBOARD Name
-      raw: "/system identity print; quit"
+      shell: "/system identity print"
       register: rb_name
+      ignore_errors: yes
 
     - name: Log Messages
-      raw: "{ :log info \"AWX Entrando\"; :log info \"AWX Saindo\"; quit; }"
+      shell: "{ :log info \"AWX Entrando\"; :log info \"AWX Saindo\"; }"
+      ignore_errors: true
+
+    - name: Clean RouterBOARD Name
+      set_fact:
+        cleaned_rb_name: "{{ rb_name.stdout | regex_replace('\r|\u001b[9999B|\r\r\ninterrupted\n\u001b7\u001b[m\u001b8', '') }}"
 
     - name: Print Message
       debug:
-        msg: "Comandos executados no dispositivo: {{ rb_name.stdout }}"
+        msg: "Comandos executados no dispositivo: {{ cleaned_rb_name }}"
