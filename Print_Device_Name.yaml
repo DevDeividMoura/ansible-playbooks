@@ -14,7 +14,8 @@
 
     - name: Clean RouterBOARD Name
       set_fact:
-        cleaned_rb_name: "{{ rb_name.stdout | regex_replace('@@@(.*?)@@@', '\\1') }}"
+        cleaned_rb_name: "{{ rb_name.stdout | regex_replace('@@@([^\u001b\r\n]*?)@@@', '\\1') }}"
+
 
     - name: Print Message
       debug:
