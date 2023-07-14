@@ -12,9 +12,13 @@
       raw: "{ :log info \"AWX Entrando\"; :log info \"AWX Saindo\"; quit;}"
       changed_when: false
 
-    - name: Clean RouterBOARD Name
+    - name: Clean Control Characters
       set_fact:
-        cleaned_rb_name: "{{ rb_name.stdout | regex_replace('@@@([^\u001b\r\n]*?)@@@', '\\1') }}"
+        rb_name_cleaned_control_chars: "{{ rb_name.stdout | regex_replace('\r|\n|\u001b\\[[0-9;]*[mB]', '') }}"
+
+    - name: Extract RouterBOARD Name
+      set_fact:
+        cleaned_rb_name: "{{ rb_name_cleaned_control_chars | regex_replace('.*?@@@(.*?)@@@.*', '\\1') }}"
 
 
     - name: Print Message
