@@ -8,18 +8,9 @@
       register: rb_name
       changed_when: false
 
-    - name: Log Messages
-      raw: "{ :log info \"AWX Entrando\"; :log info \"AWX Saindo\"; quit;}"
-      changed_when: false
-
-    - name: Clean Control Characters
+    - name: Clean Control Characters and Extract RouterBOARD Name
       set_fact:
-        rb_name_cleaned_control_chars: "{{ rb_name.stdout | regex_replace('\r|\n|\u001b\\[[0-9;]*[mB]', '') }}"
-
-    - name: Extract RouterBOARD Name
-      set_fact:
-        cleaned_rb_name: "{{ rb_name_cleaned_control_chars | regex_replace('.*?@@@(.*?)@@@.*', '\\1') }}"
-
+        cleaned_rb_name: "{{ rb_name.stdout | regex_replace('\r|\n|\u001b\\[[0-9;]*[mB]', '') | regex_replace('.*?@@@(.*?)@@@.*', '\\1') }}"
 
     - name: Print Message
       debug:
