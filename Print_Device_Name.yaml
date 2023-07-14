@@ -8,7 +8,7 @@
       register: rb_name
 
     - name: Log Messages
-      raw: "{ :log info \"AWX Entrando\"; :log info (\"Nome da RB: \" . [/system identity get name]); :log info \"AWX Saindo\"; quit; }"
+      raw: "{ :log info \"AWX Entrando\"; :log info \"AWX Saindo\"; quit; }"
 
     - name: Print Message
       debug:
