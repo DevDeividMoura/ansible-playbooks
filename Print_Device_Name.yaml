@@ -4,7 +4,7 @@
   gather_facts: no
   tasks:
     - name: Get RouterBOARD Name
-      raw: ":put ('@@@'.[/system identity get name].'@@@'); quit;"
+      raw: '':put ("@@@".[/system identity get name]."@@@"); quit;'
       register: rb_name
       changed_when: false
 
