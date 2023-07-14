@@ -1,0 +1,7 @@
+- name: Print Host Name
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Print Host Name
+      debug:
+        msg: "Nome do host: {{ inventory_hostname }}"
