@@ -4,13 +4,13 @@
   gather_facts: no
   tasks:
     - name: Get RouterBOARD Name
-      shell: "/system identity print; quit;"
+      raw: "/system identity print; quit;"
       register: rb_name
-      ignore_errors: yes
+      changed_when: false
 
     - name: Log Messages
-      shell: "{ :log info \"AWX Entrando\"; :log info \"AWX Saindo\"; quit;}"
-      ignore_errors: true
+      raw: "{ :log info \"AWX Entrando\"; :log info \"AWX Saindo\"; quit;}"
+      changed_when: false
 
     - name: Clean RouterBOARD Name
       set_fact:
