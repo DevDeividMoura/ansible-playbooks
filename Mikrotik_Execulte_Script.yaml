@@ -1,11 +1,16 @@
 ---
-- name: Executar script personalizado na routerboard MikroTik
-  hosts: Backbone - Test
+- name: Run Script Sample
+  hosts: "{{ hosts }}"
   gather_facts: no
-  vars:
-    ansible_python_interpreter: /usr/bin/python3
-    ansible_connection: network_cli
-    ansible_network_os: ios
   tasks:
-    - name: Executa o script personalizado
-      raw: "{{ script }}"
+    - name: Get RouterBOARD Name
+      raw: "/system identity get name; quit"
+      register: rb_name
+
+    - name: Run Script
+      raw: "{{ script }}; quit"
+      register: result
+
+    - name: Print Result
+      debug:
+        msg: "Script executado no dispositivo: {{ rb_name.stdout | regex_replace('[\\r\\n\\u001b\\[\\d+mB]', '') }}"
